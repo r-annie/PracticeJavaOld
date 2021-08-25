@@ -57,21 +57,21 @@ public class RoadController {
             blockWay("высота вашего ТС превышает высоту пропускного пункта!");
             return -1;
         } else if (carHeight > passengerCarMaxHeight) {
-            //переменная типа double
-            double weight = car.weight;
             //Грузовой автомобиль
-            if (weight > passengerCarMaxWeight) {
-                price = passengerCarPrice;
-                if (car.hasVehicle) {
-                    price = price + vehicleAdditionalPrice;
-                }
-            }
-            //Легковой автомобиль
-            else {
-                price = cargoCarPrice;
-            }
+            price = cargoCarPrice;
         } else {
-            price = passengerCarPrice;
+            double weight = car.weight;
+            if (weight > passengerCarMaxWeight) {
+                //Грузовой автомобиль
+                price = cargoCarPrice;
+            } else {
+                //Легковой автомобиль
+                price = passengerCarPrice;
+            }
+        }
+        if (car.hasVehicle) {
+            //Прицеп
+            price = price + vehicleAdditionalPrice;
         }
         return price;
     }
