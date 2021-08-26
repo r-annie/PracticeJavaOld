@@ -9,7 +9,7 @@ public class RoadController {
     //переменная типа int
     private static int passengerCarMaxHeight = 2000; // mm
     //переменная типа int
-    //модуль 2, урок 5, задача 1.1, строка 13
+    //модуль 2, задача 5, строка 13
     private static int controllerMaxHeight = 3500; // mm
     //переменная типа int
     private static int passengerCarPrice = 100; // RUB
@@ -54,7 +54,7 @@ public class RoadController {
         int carHeight = car.height;
         //переменная типа int
         int price = 0;
-        //модуль 2, урок 5, задача 1.2, строки 58-79
+        //модуль 2, задача 5, строки 58-79
         if (carHeight > controllerMaxHeight) {
             blockWay("высота вашего ТС превышает высоту пропускного пункта!");
             return -1;
