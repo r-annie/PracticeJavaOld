@@ -1,5 +1,4 @@
 import core.*;
-import core.Camera;
 
 import java.util.Scanner;
 
@@ -52,24 +51,19 @@ public class RoadController {
     private static int calculatePrice(Car car) {
         //переменная типа int
         int carHeight = car.height;
-        //переменная типа int
+        //модуль 2, задача 5, строки 54-73
+        double carWeight = car.weight;
         int price = 0;
-        //модуль 2, задача 5, строки 58-79
+        boolean passengerCarParameters = carHeight <= passengerCarMaxHeight && carWeight <= passengerCarMaxWeight;
         if (carHeight > controllerMaxHeight) {
             blockWay("высота вашего ТС превышает высоту пропускного пункта!");
             return -1;
-        } else if (carHeight > passengerCarMaxHeight) {
+        } else if (passengerCarParameters) {
+            //Легковой автомобиль
+            price = passengerCarPrice;
+        } else {
             //Грузовой автомобиль
             price = cargoCarPrice;
-        } else {
-            double weight = car.weight;
-            if (weight > passengerCarMaxWeight) {
-                //Грузовой автомобиль
-                price = cargoCarPrice;
-            } else {
-                //Легковой автомобиль
-                price = passengerCarPrice;
-            }
         }
         if (car.hasVehicle) {
             //Прицеп
