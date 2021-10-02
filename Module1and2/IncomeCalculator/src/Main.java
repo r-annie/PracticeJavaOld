@@ -18,20 +18,34 @@ public class Main {
 
     public static void main(String[] args) {
         while (true) {
+            //расчёт и вывод минимальной суммы дохода для инвестирования
+            double minIncomeForInvestments = (minInvestmentsAmount+calculateFixedCharges()*
+                    (1-mainTaxPercent))/((1-mainTaxPercent)*(1-managerPercent));
+            System.out.println("Минимальная сумма доходов компании в месяц " +
+                            "для возможности инвестирования " + minIncomeForInvestments + " рублей.");
             System.out.println("Введите сумму доходов компании за месяц " +
                 "(от 200 до 900 тысяч рублей): ");
+            //ввод суммы доходов компании за месяц
             int income = (new Scanner(System.in)).nextInt();
 
             if (!checkIncomeRange(income)) {
                 continue;
             }
 
+            //расчет зарплаты менеджера в месяц = сумма доходов * процент(часть)менеджера
             double managerSalary = income * managerPercent;
+            //расчет чистой прибыли в месяц: сумма доходов - зарплата менеджера - всё, что описано в
+            //calculateFixedCharges()
             double pureIncome = income - managerSalary -
                 calculateFixedCharges();
+            //расчет налогов на прибыль в месяц: налоговая ставка * чистую прибыль
             double taxAmount = mainTaxPercent * pureIncome;
+            //расчет чистой прибыли в месяц за вычетом налогов: чистая прибыль в
+            // месяц - налоги на прибыль в месяц
             double pureIncomeAfterTax = pureIncome - taxAmount;
 
+            //булева переменная - возможность инвестировать: истина, если чистая прибыль после
+            //вычета налогов превышает минимальную сумму для инвестирования
             boolean canMakeInvestments = pureIncomeAfterTax >=
                 minInvestmentsAmount;
 
@@ -59,10 +73,15 @@ public class Main {
     }
 
     private static int calculateFixedCharges() {
+        //стоимость аренды
         return officeRentCharge +
+                // стоимость услуг телефонии
             telephonyCharge +
+                // стоимость услуг доступа к интернету
             internetAccessCharge +
+                // зарплата ассистента -
             assistantSalary +
+                // зарплата менеджера по финансам
             financeManagerSalary;
     }
 }
