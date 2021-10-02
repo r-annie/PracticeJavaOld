@@ -52,7 +52,10 @@ public class Basket {
         }
 
         items = items + "\n" + name + " - " +
-            count + " шт. - " + price + " руб. - " + weight + " кг, вес 1 шт. ";
+                count + " шт. - " + price + " руб.";
+        if (weight != 0) {
+            items = items + " - " + weight + " кг, вес 1 шт.";
+        }
         totalPrice = totalPrice + count * price;
         totalWeight = totalWeight + count * weight;
     }
