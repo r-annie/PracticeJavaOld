@@ -24,6 +24,7 @@ public class Cargo {
     }
 
 
+
     public double getWeight() {
         return weight;
     }
